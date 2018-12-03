@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Budget App</title>
+
+    <!-- MONTSERRAT -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500" rel="stylesheet">
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <!-- CUSTOM STYLES -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- TOP SECTION -->
+
+    <section id="budget-top">
+        <div class="budget-top__container">
+            <div class="budget-panel">
+
+                <div class="budget-panel__heading">Budget Management Application</div>
+
+                <div class="budget-panel__date">November</div>
+
+
+
+                <div class="budget-panel__total"></div>
+
+                <div class="budget-panel__income">
+                    <div class="budget-panel__income--text">Income</div>
+                    <div class="budget-panel__income--value"></div>
+                    <div class="budget-panel__income--percentage"></div>
+                </div>
+
+
+                <div class="budget-panel__expense">
+                    <div class="budget-panel__expense--text">Expense</div>
+                    <div class="budget-panel__expense--value"></div>
+                    <div class="budget-panel__expense--percentage"></div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MIDDLE SECTION -->
+
+    <section id="budget-middle">
+        <div class="budget-user__container">
+            <div class="input-panel">
+                <div class="input-panel__calculation-type">
+                    <select class="calc-type">
+                        <option value="income" selected>+</option>
+                        <option value="expense">-</option>
+                    </select>
+                </div>
+                <div class="desc-input">
+                    <input type="text" class="product-description" placeholder="Add description">
+                </div>
+                <div class="cat-type">
+                    <select class="category">
+                        <option value="initial" selected>Choose</option>
+                        <option value="Food">Food</option>
+                        <option value="Charge">Charges</option>
+                        <option value="Transport">Transport</option>
+                    </select>
+                </div>
+                <div class="value-input">
+                    <input type="number" class="product-value" placeholder="Value">
+                </div>
+                <div class="submit">
+                    <button class="submit-btn">
+                        <i class="confirm-icon far fa-check-circle fa-3x"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HEADERS SECTION -->
+
+    <section id="headers">
+
+        <div class="headers__titles">
+
+            <div class="headers__title--income">Income</div>
+
+            <div class="headers__title--expense">Expense</div>
+
+        </div>
+    </section>
+
+    <section class="budget-bottom">
+        <div class="income-list">
+
+            <!--
+            <div class="item" id="income-0">
+                <div class="item__description">Salary</div>
+                <div class="item__category">Income</div>
+                <div class="item__content-box">
+                    <div class="item__value income">+ 4500</div>
+                    <div class="item-remove">
+                        <button class="delete-btn income"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item" id="income-1">
+                <div class="item__description">Sold Bitch</div>
+                <div class="item__category">Income</div>
+                <div class="item__content-box">
+                    <div class="item__value income">+ 2500</div>
+                    <div class="item-remove">
+                        <button class="delete-btn income"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item" id="income-2">
+                <div class="item__description">Sold Bitch</div>
+                <div class="item__category">Income</div>
+                <div class="item__content-box">
+                    <div class="item__value income">+ 2500</div>
+                    <div class="item-remove">
+                        <button class="delete-btn income"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+-->
+
+        </div>
+
+        <div class="expense-list">
+
+            <!--
+            <div class="item" id="expense-0">
+                <div class="item__description">Groceries</div>
+                <div class="item__category">Food</div>
+                <div class="item__content-box">
+                    <div class="item__value expense">- 110</div>
+                    <div class="expense__percentage">100%</div>
+                    <div class="item-remove">
+                        <button class="delete-btn expense"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item" id="expense-1">
+                <div class="item__description">Achtung</div>
+                <div class="item__category">E11</div>
+                <div class="item__content-box">
+                    <div class="item__value expense">- 2</div>
+                    <div class="expense__percentage">100%</div>
+                    <div class="item-remove ">
+                        <button class="delete-btn expense"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="item" id="expense-2">
+                <div class="item__description">Achtung</div>
+                <div class="item__category">E11</div>
+                <div class="item__content-box">
+                    <div class="item__value expense">- 2</div>
+                    <div class="expense__percentage">100%</div>
+                    <div class="item-remove ">
+                        <button class="delete-btn expense"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+-->
+
+        </div>
+    </section>
+
+
+    <script src="custom.js"></script>
+</body>
+
+</html>
