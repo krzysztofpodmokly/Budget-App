@@ -244,36 +244,53 @@ var UIController = (function () {
             if (type === 'income') {
                 element = DOMStrings.incomeList;
 
-                html = '<div class="item" id="income-$id$"><div class="item__description">$description$</div><div class="item__category">$category$</div><div class="item__content-box"><div class="item__value income">$value$</div><div class="item-remove"><button class="delete-btn income"><i class="fas fa-trash-alt"></i></button></div></div></div>';
+                html = `<div class="item" id="income-${obj.id}">
+                            <div class="item__description">${obj.description}</div>
+                            <div class="item__category">${obj.category}</div>
+                            <div class="item__content-box">
+                                <div class="item__value income">${obj.value}</div>
+                                <div class="item-remove">
+                                    <button class="delete-btn income">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>`;
 
             } else if (type === 'expense') {
                 element = DOMStrings.expenseList;
 
-                html = '<div class="item" id="expense-$id$"><div class="item__description">$description$</div><div class="item__category">$category$</div><div class="item__content-box"><div class="item__value expense">$value$</div><div class="expense__percentage">100%</div><div class="item-remove"><button class="delete-btn expense"><i class="fas fa-trash-alt"></i></button></div></div></div>';
+                html = `<div class="item" id="expense-${obj.id}">
+                            <div class="item__description">${obj.description}</div>
+                            <div class="item__category">${obj.category}</div>
+                            <div class="item__content-box">
+                                <div class="item__value expense">${obj.value}</div>
+                                <div class="expense__percentage">100%</div>
+                                <div class="item-remove">
+                                    <button class="delete-btn expense">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>`;
 
             }
 
             // 2. Replace the placeholder text with some actual data
-            itemHTML = html.replace('$id$', obj.id);
-            itemHTML = itemHTML.replace('$description$', obj.description);
-            itemHTML = itemHTML.replace('$category$', obj.category);
-            itemHTML = itemHTML.replace('$value$', formatNumber(obj.value, type));
+            // itemHTML = html.replace('$id$', obj.id);
+            // itemHTML = itemHTML.replace('$description$', obj.description);
+            // itemHTML = itemHTML.replace('$category$', obj.category);
+            // itemHTML = itemHTML.replace('$value$', formatNumber(obj.value, type));
 
             // 3. Insert HTML into the DOM
-            document.querySelector(element).insertAdjacentHTML('beforeend', itemHTML);
+            document.querySelector(element).insertAdjacentHTML('beforeend', html);
         },
 
-        clearInputFields: function () {
-            var fields, fieldsArray;
+        clearInputFields() {
+            const fields = document.querySelectorAll(`${DOMStrings.productDescription}, ${DOMStrings.productValue}`); //fields is not an array (its a list) that is why it must be changed to an array with slice method
 
-            fields = document.querySelectorAll(DOMStrings.productDescription + ', ' + DOMStrings.productValue); //fields is not an array (its a list) that is why it must be changed to an array with slice method
-
-            //fields.slice() ERROR!
-
-            fieldsArray = Array.prototype.slice.call(fields); //refers to Array prototype to call slice method on item which does not have access to SLICE method
-            fieldsArray.forEach(function (el) {
-                return el.value = '';
-            });
+            const fieldsArray = Array.from(fields);
+            fieldsArray.forEach(el => el.value = '');
 
             //document.querySelector(DOMStrings.productDescription).focus();
             fieldsArray[0].focus(); //setting focus to description input
@@ -287,8 +304,8 @@ var UIController = (function () {
         //                totalIncome: data.totals.income,
         //                totalExpense: data.totals.expense,
         //                percentage: data.percentage
-        showBudget: function (obj) {
-            var type;
+        showBudget(obj) {
+            let type;
             
             obj.budget > 0 ? type = 'income' : type = 'expense';
             
@@ -303,10 +320,10 @@ var UIController = (function () {
 
         },
 
-        showPercentages: function (percentages) {
+        showPercentages(percentages) {
 
             //Node list - forEach method does not work for lists
-            var fields = document.querySelectorAll(DOMStrings.itemPercentage); //cannot use querySelector because I dont know how many items will be submitted
+            const fields = document.querySelectorAll(DOMStrings.itemPercentage); //cannot use querySelector because I dont know how many items will be submitted
 
             nodeListForEach(fields, function (el, index) {
 
@@ -319,32 +336,29 @@ var UIController = (function () {
             });
         },
 
-        deleteItem: function (id) {
-            var el = document.getElementById(id);
+        deleteItem(id) {
+            const el = document.getElementById(id);
             el.parentNode.removeChild(el); //it is only possible to remove child
         },
 
-        showDate: function () {
-            var now, year, month, months;
+        showDate() {
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
 
-            now = new Date();
-            year = now.getFullYear();
-            month = now.getMonth();
-
-            document.querySelector(DOMStrings.dateLabel).textContent = months[month] + ' ' + year;
+            document.querySelector(DOMStrings.dateLabel).textContent = `${months[month]} ${year}`;
 
         },
 
-        changedType: function () {
+        changedType() {
 
-            var fields = document.querySelectorAll(
-                DOMStrings.calculationType + ',' +
-                DOMStrings.productDescription + ',' +
-                DOMStrings.productValue + ',' +
-                DOMStrings.productCategory
-            );
+            const fields = document.querySelectorAll(
+                `${DOMStrings.calculationType}, 
+                ${DOMStrings.productDescription}, 
+                ${DOMStrings.productValue}, 
+                ${DOMStrings.productCategory}`);
 
             nodeListForEach(fields, function(el) {
                el.classList.toggle('red-border');
@@ -355,13 +369,10 @@ var UIController = (function () {
 
         },
 
-        returnStrings: function () {
+        returnStrings() {
             return DOMStrings;
         }
     }
-
-
-
 
 })();
 
@@ -369,16 +380,16 @@ var UIController = (function () {
                         GLOBAL CONTROLLER
 ===================================================================*/
 
-var controller = (function (UICtrl, budgetCtrl) {
+const controller = (function (UICtrl, budgetCtrl) {
 
-    var eventListeners = function () {
-        var allStrings = UICtrl.returnStrings(); //Importing string values from UI Controller
+    const eventListeners = function () {
+        const allStrings = UICtrl.returnStrings(); //Importing string values from UI Controller
 
         //MOUSE CLICK
         document.querySelector(allStrings.submitBtn).addEventListener('click', validateData);
 
         //ENTER CLICK
-        document.addEventListener('keypress', function (event) {
+        document.addEventListener('keypress', event => {
             if (event.code === 'Enter') {
                 validateData();
             }
@@ -392,24 +403,24 @@ var controller = (function (UICtrl, budgetCtrl) {
 
     }
 
-    var updateBudget = function () {
+    const updateBudget = () => {
         // 1. Calculate the budget
         budgetCtrl.calculateBudget();
 
         // 2. Return the budget
-        var budget = budgetCtrl.returnBudget();
+        const budget = budgetCtrl.returnBudget();
 
         // 3. Display the budget on the UI
         UICtrl.showBudget(budget);
 
     };
 
-    var updatePercentages = function () {
+    const updatePercentages = () => {
         // 1. Calculate percentages
         budgetCtrl.calculatePercentages();
 
         // 2. Read percentages from the budget controller
-        var percentages = budgetCtrl.getPercentages();
+        const percentages = budgetCtrl.getPercentages();
 
         // 3. Update the UI with the new percentages
         UICtrl.showPercentages(percentages);
@@ -417,7 +428,7 @@ var controller = (function (UICtrl, budgetCtrl) {
 
 
 
-    var validateData = function () {
+    const validateData = () => {
         var userInput, newItem;
 
         // 1. Get input data
@@ -450,10 +461,10 @@ var controller = (function (UICtrl, budgetCtrl) {
         }
     };
 
-    var removeItem = function (event) {
-        var itemID, splitID, ID, alt;
+    const removeItem = event => {
+        let itemID, splitID;
 
-        var isFirefox = typeof InstallTrigger !== 'undefined'; //check browser type
+        const isFirefox = typeof InstallTrigger !== 'undefined'; //check browser type
 
         if (isFirefox) {
             itemID = event.target.parentNode.parentNode.parentNode.id;
@@ -462,11 +473,9 @@ var controller = (function (UICtrl, budgetCtrl) {
         }
 
         if (itemID) {
-
             //income-1
             splitID = itemID.split('-'); //[income, 0]
-            type = splitID[0]; //=> income
-            ID = parseInt(splitID[1]); //=> 0
+            const [type, ID] = splitID;
 
             // 1. Delete the item from the data structure
             budgetCtrl.deleteItem(type, ID);
@@ -487,7 +496,7 @@ var controller = (function (UICtrl, budgetCtrl) {
 
 
     return {
-        init: function () {
+        init() {
             console.log('Application started');
             UICtrl.showDate();
             UICtrl.showBudget({
