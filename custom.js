@@ -238,7 +238,7 @@ var UIController = (function () {
         },
 
         addListItem: function (obj, type) {
-            var html, itemHTML, element;
+            let html, element;
             // 1. Create HTML string with placeholder text
 
             if (type === 'income') {
